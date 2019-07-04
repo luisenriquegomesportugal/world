@@ -4,7 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\City;
 use App\Http\Requests\CityRequest;
-use App\Http\Resources\City as CityResource;
+use App\Http\Resources\CityResource;
+use App\Http\Resources\CityResourceCollection;
 use App\Http\Controllers\Controller;
 
 class CityController extends Controller
@@ -12,18 +13,18 @@ class CityController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\CityResourceCollection
      */
     public function index()
     {
-        return CityResource::collection(City::paginate());
+        return new CityResourceCollection(City::paginate());
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\CityRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\CityResource
      */
     public function store(CityRequest $request)
     {
@@ -35,10 +36,14 @@ class CityController extends Controller
      * Display the specified resource.
      *
      * @param  City  $city
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\CityResource
      */
-    public function show(City $city)
+    public function show(City $city, $relation = null)
     {
+        if ($relation) {
+            return $city->$relation;
+        }
+
         return new CityResource($city);
     }
 
@@ -47,7 +52,7 @@ class CityController extends Controller
      *
      * @param  \App\Http\Requests\CityRequest  $request
      * @param  City  $city
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\CityResource
      */
     public function update(CityRequest $request, City $city)
     {
@@ -61,7 +66,7 @@ class CityController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  City  $city
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\CityResource
      */
     public function destroy(City $city)
     {

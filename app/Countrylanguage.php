@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Countrylanguage extends Model
 {
-    protected $table = "Countrylanguage";
+    protected $table = "countrylanguage";
+    protected $primaryKey = "Language";
 
-    protected $increments = false;
-    protected $timestamps = false;
-
+    public $incrementing = false;
+    public $timestamps = false;
     public $fillable = ["CountryCode", "Language", "IsOfficial", "Percentage"];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, "CountryCode", "Code");
+    }
 }

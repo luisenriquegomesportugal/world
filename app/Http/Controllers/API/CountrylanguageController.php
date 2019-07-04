@@ -4,7 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Countrylanguage;
 use App\Http\Requests\CountrylanguageRequest;
-use App\Http\Resources\Countrylanguage as CountrylanguageResource;
+use App\Http\Resources\CountrylanguageResource;
+use App\Http\Resources\CountrylanguageResourceCollection;
 use App\Http\Controllers\Controller;
 
 class CountrylanguageController extends Controller
@@ -12,18 +13,18 @@ class CountrylanguageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\CountrylanguageResourceCollection
      */
     public function index()
     {
-        return CountrylanguageResource::collection(Countrylanguage::paginate());
+        return new CountrylanguageResourceCollection(Countrylanguage::paginate());
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\CountrylanguageRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\CountrylanguageResource
      */
     public function store(CountrylanguageRequest $request)
     {
@@ -35,7 +36,7 @@ class CountrylanguageController extends Controller
      * Display the specified resource.
      *
      * @param  Countrylanguage  $countrylanguage
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\CountrylanguageResource
      */
     public function show(Countrylanguage $countrylanguage)
     {
@@ -47,7 +48,7 @@ class CountrylanguageController extends Controller
      *
      * @param  \App\Http\Requests\CountrylanguageRequest  $request
      * @param  Countrylanguage  $countrylanguage
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\CountrylanguageResource
      */
     public function update(CountrylanguageRequest $request, Countrylanguage $countrylanguage)
     {
@@ -61,7 +62,7 @@ class CountrylanguageController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  Countrylanguage  $countrylanguage
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\CountrylanguageResource
      */
     public function destroy(Countrylanguage $countrylanguage)
     {

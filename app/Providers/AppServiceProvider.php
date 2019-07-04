@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Http\Resources\CityResource;
+use App\Http\Resources\CountryResource;
+use App\Http\Resources\CountrylanguageResource;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        CityResource::withoutWrapping();
+        CountryResource::withoutWrapping();
+        CountrylanguageResource::withoutWrapping();
     }
 }
